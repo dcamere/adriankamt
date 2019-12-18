@@ -168,7 +168,7 @@ p, h2, h3, h4, a, span {
     @include desktop {
       padding-left: 10%;
     }
-    
+
     .mainp {
       font-size: 16px;
       line-height: 20px;
@@ -185,6 +185,77 @@ p, h2, h3, h4, a, span {
     &__accordion {
       &__item {
 
+      }
+    }
+  }
+}
+
+.section-portafolio {
+  &__title {
+    font-size: 60px;
+    margin: 0;
+  }
+
+  &__subtitle {
+    @include desktop {
+      margin-left: 26px;
+    }
+  }
+
+  &__identidad-corp {
+    .img-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      
+      .col {
+        text-align: center;
+        margin-bottom: 16px;
+
+        &:nth-child(2) {
+          img {
+            width: 15%;
+            margin-right: 40px;
+            &:last-child {
+              width: 25%;
+              margin-top: 16px;
+            }
+          }
+        }
+      }
+      
+      img {
+        width: 20%;
+        margin-right: 16px;
+        max-height: 200px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  &__btl-atl {
+    .img-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      img {
+        width: 150px;
+        margin-right: 16px;
+        margin-bottom: 16px;
+
+        @include desktop {
+          width: 20%;
+          max-height: 200px;
+
+          &:nth-child(2),
+          &:last-child {
+            margin-right: 16px !important;
+          }
+        }
+
+       
       }
     }
   }
