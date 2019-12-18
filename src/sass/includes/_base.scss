@@ -1,0 +1,67 @@
+@import "variables";
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+
+a {
+  color: $link;
+  transition: color 200ms;
+  &:hover {
+    color: darken($link, 20);
+  }
+}
+
+@each $name, $value in $colorList {
+  .has-background-#{$name} {
+    background-color: $value;
+  }
+}
+
+@each $name, $value in $fontColors {
+  .has-text-#{$name} {
+    color: $value;
+  }
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+@mixin createFont($fontSize, $color, $fontWeight, $fontFamily) {
+  font-size: $fontSize;
+  color: $color;
+  font-family: $fontFamily;
+  font-weight: $fontWeight;
+}
+
+@mixin tablet {
+  @media only screen and (min-width: 768px) {
+      @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: 1025px) {
+      @content;
+  }
+}
+
+@function width-column($columns, $total) {
+  @return (100% / $total) * $columns;
+}
+
+@mixin clearfix {
+  &::after {
+      content: '';
+      display: table;
+      clear: both;
+  }
+}
