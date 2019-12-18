@@ -1,4 +1,4 @@
-section.section-main
+section.section-main#inicio
 	.container
 		.content
 			.section-main__left
@@ -17,14 +17,14 @@ section.section-main
 header.header
 	nav.menu
 		ul
-			li.active
-				a(href="#") Inicio
-			li
-				a(href="#") Portafolio
-			li
-				a(href="#") Contacto
+			li.inicio.active
+				a(href="#inicio") Inicio
+			li.portafolio
+				a(href="#portafolio") Portafolio
+			li.contacto
+				a(href="#contacto") Contacto
 
-section.section-portafolio
+section.section-portafolio#portafolio
 	.container
 		.content
 			h2.section-portafolio__title Portafolio
@@ -42,6 +42,7 @@ section.section-portafolio
 						img(src="img/espinoza.png", alt="Espinoza Fotografía")
 						img(src="img/itp.png", alt="TPT")
 						img(src="img/distorsion-oscura.png", alt="Distorsión Oscura")
+					.col
 						img(src="img/jc.png", alt="Julio Crespo")
 			
 			.section-portafolio__btl-atl
@@ -53,7 +54,7 @@ section.section-portafolio
 					img(src="img/cabanaverde.png", alt="Cabana Verde")
 
 
-footer.footer
+footer.footer#contacto
 	.footer__text
 	.footer__hand
 	.footer__contact

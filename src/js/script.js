@@ -1,12 +1,68 @@
 /* jQuery anchor link */
 $(function () {
-	$('a[href^="#"]').on('click', function (event) {
-		var href = $(this).attr('href'),
-			target = $(href == '#' || href == '' ? 'html' : href),
-			position = target.offset().top;
-		$('body, html').animate({scrollTop: position}, 250, 'swing');
-		event.preventDefault();
-	});
+	$('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // On-page links
+    if (
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+      && 
+      location.hostname == this.hostname
+    ) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
+      if (target.length) {
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1500, function() {
+          // Callback after animation
+          // Must change focus!
+          var $target = $(target);
+          $target.focus();
+          if ($target.is(":focus")) { // Checking if the target was focused
+            return false;
+          } else {
+            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+            $target.focus(); // Set focus again
+          };
+        });
+      }
+    }
+  });
+
+  var stickySidebar = $('.header').offset().top;
+  var inicio = $("#inicio");
+  var portafolio = $("#portafolio");
+  var contacto = $("#contacto");
+  
+  $(window).scroll(function() {  
+      if ($(window).scrollTop() > stickySidebar) {
+        $('.header').addClass('affix');
+      }
+      else {
+        $('.header').removeClass('affix');
+      }
+
+      if (!elementIsVisibleInViewport(document.querySelector('#inicio'))) {
+        $('.portafolio').addClass('active');
+        $('.portafolio').siblings().removeClass('active');
+        console.log('visible');
+      } else {
+        $('.inicio').addClass('active');
+        $('.portafolio').removeClass('active');
+      }
+
+      if (elementIsVisibleInViewport(document.querySelector('#contacto'))) {
+        $('.contacto').siblings().removeClass('active');
+        $('.contacto').addClass('active');
+      }
+  });
 });
 
 /* Check for device type */
