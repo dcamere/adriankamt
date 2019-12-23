@@ -37,9 +37,6 @@ $(function () {
   });
 
   var stickySidebar = $('.header').offset().top;
-  var inicio = $("#inicio");
-  var portafolio = $("#portafolio");
-  var contacto = $("#contacto");
   
   $(window).scroll(function() {  
       if ($(window).scrollTop() > stickySidebar) {
@@ -49,19 +46,31 @@ $(function () {
         $('.header').removeClass('affix');
       }
 
-      if (!elementIsVisibleInViewport(document.querySelector('#inicio'))) {
-        $('.portafolio').addClass('active');
-        $('.portafolio').siblings().removeClass('active');
-        console.log('visible');
-      } else {
-        $('.inicio').addClass('active');
-        $('.portafolio').removeClass('active');
-      }
+      var scrollPos = $(document).scrollTop();
+      $('.header a').each(function () {
+          var currLink = $(this);
+          var refElement = $(currLink.attr("href"));
+          if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+              $('.header ul li a').closest('li').removeClass("active");
+              currLink.closest('li').addClass("active");
+          }
+          else{
+              currLink.closest('li').removeClass("active");
+          }
+      });
 
-      if (elementIsVisibleInViewport(document.querySelector('#contacto'))) {
-        $('.contacto').siblings().removeClass('active');
+      if (elementInViewport(document.querySelector('#contacto'))) {
         $('.contacto').addClass('active');
+        $('.contacto').siblings().removeClass('active');
       }
+  });
+
+
+  $('.section-main__accordion__click').on('click', function () {
+    $('.section-main__accordion').toggleClass('active');
+    setTimeout(function () {
+      stickySidebar = $('.header').offset().top;
+    }, 250);
   });
 });
 
@@ -87,6 +96,26 @@ var elementIsVisibleInViewport = function elementIsVisibleInViewport(el) {
 	
 	return partiallyVisible ? (top > 0 && top < innerHeight || bottom > 0 && bottom < innerHeight) && (left > 0 && left < innerWidth || right > 0 && right < innerWidth) : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
 };
+
+function elementInViewport(el) {
+  var top = el.offsetTop;
+  var left = el.offsetLeft;
+  var width = el.offsetWidth;
+  var height = el.offsetHeight;
+
+  while(el.offsetParent) {
+    el = el.offsetParent;
+    top += el.offsetTop;
+    left += el.offsetLeft;
+  }
+
+  return (
+    top < (window.pageYOffset + window.innerHeight) &&
+    left < (window.pageXOffset + window.innerWidth) &&
+    (top + height) > window.pageYOffset &&
+    (left + width) > window.pageXOffset
+  );
+}
 
 /* Example of GSAP Timeline lite */
 $(document).ready(function () {

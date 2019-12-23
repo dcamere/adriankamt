@@ -58,11 +58,26 @@ p, h2, h3, h4, a, span {
       }
 
       li {
+        position: relative;
         display: inline-block;
         @include desktop {
           margin-right: 32px;
           &:last-child {
             margin-right: 0;
+          }
+        }
+
+        &.active {
+          &::before {
+            content: '';
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 50%;
+            transform: translateX(-50%);
+            height: 10px;
+            width: 10px;
+            background-color: $color-orange;
+            border-radius: 50%;
           }
         }
 
@@ -72,24 +87,6 @@ p, h2, h3, h4, a, span {
           text-decoration: none;
           color: $color-orange;
           cursor: pointer;
-        }
-
-        @include desktop {
-          position: relative;
-
-          &.active {
-            &::before {
-              content: '';
-              position: absolute;
-              top: calc(100% + 4px);
-              left: 50%;
-              transform: translateX(-50%);
-              height: 10px;
-              width: 10px;
-              background-color: $color-orange;
-              border-radius: 50%;
-            }
-          }
         }
       }
     }
@@ -105,6 +102,34 @@ p, h2, h3, h4, a, span {
   @include tablet {
     height: auto;
   }
+  &__accordion {
+    &__click {
+      height: 25px;
+      width: 25px;
+      background-image: url('../img/acordeon.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+
+    &__item {
+      height: 0;
+      overflow: hidden;
+      transition: all 0.5s;
+    }
+
+    &.active {
+      .section-main__accordion__click {
+        background-image: url('../img/acordeon2.png');
+      }
+
+      .section-main__accordion__item {
+        height: 100px;
+        padding-top: 20px;
+      }
+    }
+  }
+
 
   &__left {
     margin: 24px 0;
@@ -188,12 +213,6 @@ p, h2, h3, h4, a, span {
         line-height: 29px;
       }
     }
-
-    &__accordion {
-      &__item {
-
-      }
-    }
   }
 }
 
@@ -254,8 +273,97 @@ p, h2, h3, h4, a, span {
 }
 
 .footer {
-  height: 200px;
+  display: flex;
+  flex-wrap: wrap;
   background-color: $color-orange;
   background-image: url('../img/dust2.png');
   border-top: 1px $color-black solid;
+  position: relative;
+  padding: 80px 5%;
+  justify-content: center;
+  @include desktop {
+    padding: 100px 5%;
+    justify-content: flex-start;
+  }
+  
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-bottom: 16px;
+      padding: 5px;
+      outline: none;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:active, &:focus {
+        border: 1px $color-black solid;
+      }
+    }
+
+    textarea {
+      resize: none;
+      margin-bottom: 16px;
+      padding: 5px;
+
+      &:active, &:focus {
+        border: 1px $color-black solid;
+      }
+    }
+  }
+
+  &__text {
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    @include desktop {
+      text-align: left;
+      width: 40%;
+      font-size: 46px;
+      padding-right: 5%;
+    }
+  }
+
+  &__hand {
+    display: none;
+    @include desktop {
+      display: block;
+      width: 25%;
+      background-color: red;
+    }
+  }
+
+  &__contact {
+    @include desktop {
+      width: 30%;
+      padding-left: 9%;
+    }
+  }
+
+  &__triangle {
+    img {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      max-height: 60px;
+      @include desktop {
+        max-height: 80px;
+      }
+    }
+
+    &::after {
+      content: 'Since 1993 - and still alive !';
+      bottom: 10px;
+      right: 40px;
+      position: absolute;
+      color: $color-orange;
+      @include desktop {
+        font-size: 20px;
+        bottom: 22px;
+      }
+    }
+  }
 }
