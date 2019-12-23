@@ -11,8 +11,12 @@ section.section-main#inicio
 				.section-main__description
 					p.mainp Una persona sencilla, con facilidad para el habla y hacer amigos. Aunque pueda sonar extraño, realmente disfruto de trabajar ya que los momentos de creación artística me apasionan y es aún mucho más gratificante cuando tu trabajo tiene un impacto emocional en el cliente.
 					.section-main__accordion
+						.section-main__accordion__click
 						.section-main__accordion__item
-							div Instituto peruano de arte y diseño (2011 febrero - 2013) La cochera taller de ilustración (2015) Pre bellas artes pueso 18 / 243 (2017) 
+							ul
+								li Instituto peruano de arte y diseño (2011 febrero - 2013) 
+								li La cochera taller de ilustración (2015) 
+								li Pre bellas artes pueso 18 / 243 (2017) 
 
 header.header
 	nav.menu
@@ -56,13 +60,16 @@ section.section-portafolio#portafolio
 
 footer.footer#contacto
 	.footer__text
+		p Cualquier consulta, no dudes en escribirme.
 	.footer__hand
+		img(src="", alt="")
 	.footer__contact
-		ul
-			li
-				a(href="tel:922919972") 922919972
-			li
-				a(href="mailto:kfadrian@gmail.com") kfadrian@gmail.com
-
+		form.footer__form(action="mailme.php" method="post")
+			input(type="text" placeholder="Quién eres?..." name="names" id="names" required)
+			input(type="text" placeholder="Tu correo..." name="email" id="email" required)
+			textarea(placeholder="Qué necesitas?..." cols="30" rows="10" name="message" id="message" required)
+			button(type="submit") Enviar
+	.footer__triangle
+		img(src="img/footer.png", alt="")
 
 
