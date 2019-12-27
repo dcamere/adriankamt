@@ -336,7 +336,10 @@ p, h2, h3, h4, a, span {
     @include desktop {
       display: block;
       width: 25%;
-      background-color: red;
+
+      img {
+        transform: rotate(90deg) scaleX(-1);
+      }
     }
   }
 
